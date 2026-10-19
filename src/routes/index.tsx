@@ -102,7 +102,7 @@ function Index() {
               <span className="h-px flex-1 bg-border" />
             </div>
             <div className="grid grid-cols-2 gap-4 pt-2 text-center text-sm font-semibold text-foreground sm:text-base">
-              <a href="#" className="hover:underline">Create Live Account</a>
+              <button type="button" onClick={() => setCreateOpen(true)} className="hover:underline">Create Live Account</button>
               <a href="#" className="hover:underline">Try Demo Account</a>
             </div>
           </form>
