@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Mail, Eye, EyeOff, RefreshCw } from "lucide-react";
+import { Mail, Eye, EyeOff, RefreshCw, ChevronDown, Check } from "lucide-react";
 import bg from "@/assets/login-bg.jpg";
 
 export const Route = createFileRoute("/")({
@@ -41,6 +41,7 @@ function Logo() {
 function Index() {
   const [show, setShow] = useState(false);
   const [robot, setRobot] = useState(false);
+  const [createOpen, setCreateOpen] = useState(false);
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-background">
