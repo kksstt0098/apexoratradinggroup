@@ -14,13 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          balance: number
+          country: string | null
+          created_at: string
+          email: string | null
+          first_name: string | null
+          id: string
+          invite_code: string
+          last_name: string | null
+          middle_name: string | null
+          phone: string | null
+          referred_by: string | null
+        }
+        Insert: {
+          balance?: number
+          country?: string | null
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          id: string
+          invite_code: string
+          last_name?: string | null
+          middle_name?: string | null
+          phone?: string | null
+          referred_by?: string | null
+        }
+        Update: {
+          balance?: number
+          country?: string | null
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          id?: string
+          invite_code?: string
+          last_name?: string | null
+          middle_name?: string | null
+          phone?: string | null
+          referred_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_referred_by_fkey"
+            columns: ["referred_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      count_my_referrals: { Args: never; Returns: number }
+      invite_code_exists: { Args: { _code: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
