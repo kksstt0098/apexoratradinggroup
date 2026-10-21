@@ -19,6 +19,9 @@
  */
 
 @theme inline {
+  --color-account-background: var(--account-background);
+  --color-banner-overlay: var(--banner-overlay);
+  --color-anniversary: var(--brand-yellow);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -62,6 +65,8 @@
 }
 
 :root {
+  --account-background: oklch(0.98 0.004 70);
+  --banner-overlay: oklch(0.08 0 0 / 55%);
   --radius: 0.625rem;
   --brand-yellow: oklch(0.85 0.17 90);
   --brand-orange: oklch(0.72 0.2 50);
