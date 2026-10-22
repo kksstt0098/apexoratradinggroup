@@ -14,3 +14,4 @@
 - Read private account data through authenticated server functions and TanStack Query loaders; keep browser auth operations on the generated client.
 - Profile updates may change personal fields only, never balances, referral ownership or invite codes, to prevent user-controlled account data.
 - Keep invitation validation in a shared browser-safe module with rule tests; the signup database trigger remains the authoritative validator.
+- Keep desktop account navigation in a dedicated sidebar and switch it with mobile bottom navigation at the same breakpoint; the account data and actions stay shared to avoid divergent behavior.
