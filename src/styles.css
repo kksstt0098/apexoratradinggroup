@@ -149,3 +149,9 @@
     color: var(--color-foreground);
   }
 }
+
+@media (min-width: 768px) {
+  .account-layout:has(aside.w-20) .account-content {
+    margin-left: 5rem;
+  }
+}
