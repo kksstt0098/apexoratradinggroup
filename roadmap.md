@@ -1,5 +1,5 @@
 # Account work
-- [ ] Separate phone and laptop/PC account layouts to match their respective screenshots and verify both signed in.
+- [x] Separate phone and laptop/PC account layouts to match their respective screenshots and verify both signed in.
 - [x] Connect signup/sign-in, optional referrals, and sign-out.
 - [x] Remove email-code fields and implement password recovery.
 - [x] Build screenshot-based My Accounts page with real account/referral data.
