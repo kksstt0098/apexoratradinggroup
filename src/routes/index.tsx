@@ -114,7 +114,7 @@ function Index() {
                   <label htmlFor="password" className="mb-3 block text-sm font-semibold text-foreground">Password</label>
                   <div className="flex h-16 items-center rounded-xl border border-border bg-background px-6">
                     <input id="password" name="password" required={!reset} autoComplete="current-password" type={show ? "text" : "password"} placeholder="Enter your password" className="min-w-0 flex-1 bg-transparent text-base font-medium text-foreground outline-none placeholder:text-muted-foreground" />
-                    <Button type="button" onClick={() => setShow(!show)} aria-label="Toggle password" className="shrink-0 text-muted-foreground">
+                    <Button type="button" variant="ghost" size="icon" onClick={() => setShow(!show)} aria-label="Toggle password" className="shrink-0 text-muted-foreground">
                       {show ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </Button>
                   </div>
@@ -125,7 +125,7 @@ function Index() {
                 {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
                 {notice && <p role="status" className="text-sm text-foreground">{notice}</p>}
                 <Button type="submit" disabled={busy} className="h-14 w-full rounded-full bg-primary text-lg font-bold text-primary-foreground shadow-lg transition hover:opacity-90 sm:h-[70px]">
-                  Sign In
+                  {busy ? (reset ? "Sending…" : "Signing in…") : reset ? "Send reset link" : "Sign In"}
                 </Button>
                 <div className="flex items-center gap-4">
                   <span className="h-px flex-1 bg-border" />
@@ -133,7 +133,7 @@ function Index() {
                   <span className="h-px flex-1 bg-border" />
                 </div>
                 <div className="grid grid-cols-2 gap-4 pt-2 text-center text-sm font-semibold text-foreground sm:text-base">
-                  <Button type="button" onClick={() => setMode("create")} className="hover:underline">Create Live Account</Button>
+                  <Button type="button" variant="link" onClick={() => setMode("create")} className="text-foreground hover:underline">Create Live Account</Button>
                   <span className="text-muted-foreground">Try Demo Account</span>
                 </div>
               </form>
@@ -232,6 +232,8 @@ function CreateAccountPanel({ onBack }: { onBack: () => void }) {
             />
             <Button
               type="button"
+              variant="ghost"
+              size="icon"
               onClick={() => setShowPw(!showPw)}
               aria-label="Toggle password"
               className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground"
@@ -251,6 +253,8 @@ function CreateAccountPanel({ onBack }: { onBack: () => void }) {
             />
             <Button
               type="button"
+              variant="ghost"
+              size="icon"
               onClick={() => setShowConfirm(!showConfirm)}
               aria-label="Toggle confirm password"
               className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground"
@@ -291,7 +295,7 @@ function CreateAccountPanel({ onBack }: { onBack: () => void }) {
 
       <p className="mt-5 text-center text-xs text-muted-foreground">
         Already a customer?{" "}
-        <Button type="button" onClick={onBack} className="font-semibold text-primary underline">
+        <Button type="button" variant="link" onClick={onBack} className="font-semibold text-primary underline">
           Sign in to your account
         </Button>
       </p>
