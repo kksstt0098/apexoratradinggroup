@@ -38,7 +38,7 @@ function Dashboard() {
   return <div className="account-layout min-h-screen bg-account-background pb-24 md:pb-8">
     <AccountSidebar onSelect={show} userName={[profile.first_name, profile.middle_name, profile.last_name].filter(Boolean).join(" ") || String(profile.email)} onLogout={logout} />
     <div className="account-content md:ml-[216px] xl:ml-[280px] 2xl:ml-[320px]">
-    <header className="sticky top-0 z-20 border-b border-border bg-background">
+    <header className="border-b border-border bg-background">
       <div className="grid h-[74px] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-5 md:h-20 md:px-8 xl:px-12 2xl:px-[72px]">
         <h1 className="min-w-0 truncate text-lg font-bold md:text-2xl">My Accounts</h1>
         <div className="flex shrink-0 items-center gap-2 md:gap-3">
@@ -78,7 +78,7 @@ function Dashboard() {
         <p className="mt-4 text-sm leading-5 text-muted-foreground"><Info className="mr-1 inline h-3.5 w-3.5" />Verification usually only takes a few minutes. Please prepare a valid identity document in advance.</p>
         <Button className="mt-5 h-12 rounded-full px-6 font-bold" onClick={() => show("Identity verification")}>Verify Now</Button>
       </section>
-      <footer className="border-t border-border/60 pt-5 pb-40 text-xs leading-5 text-muted-foreground md:pb-10 md:text-[13px] md:leading-[1.65]">
+      <footer className="border-t border-border/60 pt-5 pb-40 text-xs leading-5 text-muted-foreground md:pb-24 md:pr-24 md:text-[13px] md:leading-[1.65] xl:pr-28">
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
           <h2 className="text-base font-bold text-foreground">Disclaimer</h2>
           <span className="text-xs">© 2026 ETO Markets Limited</span>
