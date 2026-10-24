@@ -76,18 +76,18 @@ function Index() {
   }, [mode]);
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-background">
+    <div className="relative min-h-screen w-full bg-background">
       <img
         src={bg}
         alt=""
         width={1920}
         height={1088}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="fixed inset-0 h-full w-full object-cover"
       />
       <div className="relative flex min-h-screen items-center justify-center px-4 py-8 lg:justify-end lg:px-0 lg:py-0 lg:pr-[6%]">
         <div
           ref={panelRef}
-          className="w-full max-w-[612px] rounded-3xl bg-card px-6 py-8 shadow-2xl sm:px-10 sm:py-12 lg:max-h-screen lg:min-h-screen lg:overflow-y-auto lg:rounded-b-none"
+          className="w-full max-w-[612px] rounded-3xl bg-card px-6 py-8 shadow-2xl sm:px-10 sm:py-12 lg:min-h-screen lg:rounded-b-none"
         >
           <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-background shadow-sm sm:h-24 sm:w-24">
             <Logo />
