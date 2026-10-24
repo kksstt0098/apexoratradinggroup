@@ -36,7 +36,7 @@ function Dashboard() {
     await navigate({ to: "/", replace: true });
   }
   return <div className="account-layout min-h-screen bg-account-background pb-24 md:pb-8">
-    <AccountSidebar onSelect={show} userName={[profile.first_name, profile.middle_name, profile.last_name].filter(Boolean).join(" ") || profile.email} onLogout={logout} />
+    <AccountSidebar onSelect={show} userName={[profile.first_name, profile.middle_name, profile.last_name].filter(Boolean).join(" ") || String(profile.email)} onLogout={logout} />
     <div className="account-content md:ml-[216px] xl:ml-[280px] 2xl:ml-[320px]">
     <header className="sticky top-0 z-20 border-b border-border bg-background">
       <div className="grid h-[74px] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-5 md:h-20 md:px-8 xl:px-12 2xl:px-[72px]">
