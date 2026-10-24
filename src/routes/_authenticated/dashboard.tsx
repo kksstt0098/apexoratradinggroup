@@ -78,7 +78,7 @@ function Dashboard() {
         <p className="mt-4 text-sm leading-5 text-muted-foreground"><Info className="mr-1 inline h-3.5 w-3.5" />Verification usually only takes a few minutes. Please prepare a valid identity document in advance.</p>
         <Button className="mt-5 h-12 rounded-full px-6 font-bold" onClick={() => show("Identity verification")}>Verify Now</Button>
       </section>
-      <footer className="border-t border-border/60 pt-5 text-xs leading-5 text-muted-foreground md:text-[13px] md:leading-[1.65]">
+      <footer className="border-t border-border/60 pt-5 pb-40 text-xs leading-5 text-muted-foreground md:pb-10 md:text-[13px] md:leading-[1.65]">
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
           <h2 className="text-base font-bold text-foreground">Disclaimer</h2>
           <span className="text-xs">© 2026 ETO Markets Limited</span>
