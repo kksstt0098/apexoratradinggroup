@@ -36,7 +36,7 @@ function Dashboard() {
     await navigate({ to: "/", replace: true });
   }
   return <div className="account-layout min-h-screen bg-account-background pb-24 md:pb-8">
-    <AccountSidebar onSelect={show} />
+    <AccountSidebar onSelect={show} userName={[profile.first_name, profile.middle_name, profile.last_name].filter(Boolean).join(" ") || profile.email} onLogout={logout} />
     <div className="account-content md:ml-[216px] xl:ml-[280px] 2xl:ml-[320px]">
     <header className="sticky top-0 z-20 border-b border-border bg-background">
       <div className="grid h-[74px] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 px-5 md:h-20 md:px-8 xl:px-12 2xl:px-[72px]">
@@ -78,6 +78,15 @@ function Dashboard() {
         <p className="mt-4 text-sm leading-5 text-muted-foreground"><Info className="mr-1 inline h-3.5 w-3.5" />Verification usually only takes a few minutes. Please prepare a valid identity document in advance.</p>
         <Button className="mt-5 h-12 rounded-full px-6 font-bold" onClick={() => show("Identity verification")}>Verify Now</Button>
       </section>
+      <footer className="border-t border-border/60 pt-5 text-sm leading-6 text-muted-foreground">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+          <h2 className="text-base font-bold text-foreground">Disclaimer</h2>
+          <span className="text-xs">© 2026 ETO Markets Limited</span>
+        </div>
+        <p className="mt-3">ETO Markets Limited is registered in Seychelles with Company Number 850672-1 and is authorized by the Financial Services Authority (FSA) under License Number SD062. ETO Markets is authorized and regulated by the Mauritius Financial Services Commission (FSC) under License Number C119023893.</p>
+        <p className="mt-3">The information and advertisements on this website are not intended for use by any person in any country or jurisdiction where such use is contrary to local laws or regulations. Products and services offered on this website are not intended for residents of Afghanistan, Belarus, Canada, Central African Republic, Crimea, Cuba, Democratic Republic of Congo (DRC), Ethiopia, Guinea-Bissau, Iran, Iraq, Israel, Lebanon, Libya, Malaysia, Mali, Nicaragua, North Korea, Somalia, South Sudan, Sudan, Syria, Russia, Ukraine, United States, Venezuela, Yemen, and Zimbabwe.</p>
+        <p className="mt-3">The information provided on this website is general in nature and does not constitute personal financial advice. Please note that investing in CFDs and Margin FX Contracts carries significant risks and is not suitable for all investors. You do not own, or have, any interest in the underlying assets. Any information or general financial product advice given is generic in nature and does not take into account your financial situation, needs, or personal objectives. Past performance is not a reliable indicator of future performance. Investing in leveraged products carries significant risks. We recommend that you seek independent advice and ensure that you fully understand the risks involved before trading. It is important that you read and consider our disclosure documents (<strong className="text-foreground">Client Agreement</strong>, <strong className="text-foreground">Privacy Policy</strong> &amp; <strong className="text-foreground">Risk Disclosure</strong>) before acquiring any product.</p>
+      </footer>
     </main>
     </div>
     <Button className="fixed bottom-24 right-5 z-20 h-12 w-12 rounded-full shadow-lg md:bottom-8 md:right-6 md:h-14 md:w-14 [&_svg]:size-6" aria-label="Support" onClick={() => show("Support")}><Headset /></Button>
