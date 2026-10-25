@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { CandlestickChart, Wallet, UsersRound, Megaphone, ChartNoAxesCombined, Bell, Download, CircleHelp, ChevronLeft, ChevronRight, Minus, Plus, LogOut } from "lucide-react";
+import { BrandLogo } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
 
-function LogoMark({ className }: { className?: string }) {
-  return <svg viewBox="0 0 64 64" className={className} aria-hidden="true"><path d="M50 18 C42 8 22 8 14 22 C6 36 16 54 32 54 C42 54 50 48 54 40 M18 34 L50 26" fill="none" stroke="var(--primary)" strokeWidth="7" strokeLinecap="round" /><path d="M12 25 C15 12 32 5 45 12" fill="none" stroke="var(--brand-yellow)" strokeWidth="3" strokeLinecap="round" /></svg>;
-}
 
 export function AccountSidebar({ onSelect, userName, onLogout }: { onSelect: (name: string) => void; userName: string; onLogout: () => void }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -23,9 +21,9 @@ export function AccountSidebar({ onSelect, userName, onLogout }: { onSelect: (na
   ];
   return <aside aria-label="Desktop account navigation" className={`fixed inset-y-0 left-0 z-30 hidden flex-col border-r border-border/60 bg-background md:flex ${collapsed ? "w-20" : "w-[216px] xl:w-[280px] 2xl:w-[320px]"}`}>
     <div className={`flex h-[104px] shrink-0 items-center ${collapsed ? "justify-center" : "justify-between px-6"}`}>
-      {!collapsed && <div className="flex min-w-0 items-center gap-2" aria-label="ETO Markets">
-        <LogoMark className="size-12 shrink-0" />
-        <span className="leading-none"><strong className="text-[30px] font-semibold">ETO</strong><span className="block text-base">Markets</span></span>
+      {!collapsed && <div className="flex min-w-0 items-center gap-2" aria-label="VW Markets">
+        <BrandLogo className="size-12 shrink-0" />
+        <span className="leading-none"><strong className="text-[30px] font-semibold">VW</strong><span className="block text-base">Markets</span></span>
       </div>}
       <Button variant="ghost" size="icon" className="shrink-0 rounded-full bg-background shadow-sm" aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} title={collapsed ? "Expand sidebar" : "Collapse sidebar"} onClick={() => setCollapsed(!collapsed)}>{collapsed ? <ChevronRight /> : <ChevronLeft />}</Button>
     </div>
@@ -40,7 +38,7 @@ export function AccountSidebar({ onSelect, userName, onLogout }: { onSelect: (na
     </nav>
     <div className={`shrink-0 border-t border-border/60 px-4 py-4 ${collapsed ? "px-2" : "px-4"}`}>
       <div className={`flex items-center gap-2 ${collapsed ? "flex-col gap-3" : ""}`}>
-        <LogoMark className="size-9 shrink-0" />
+        <BrandLogo className="size-9 shrink-0" />
         {!collapsed && <span className="min-w-0 flex-1 truncate text-sm font-bold" title={userName}>{userName}</span>}
         <Button variant="ghost" size="icon" className={`shrink-0 rounded-full text-muted-foreground ${collapsed ? "" : "-mr-1"}`} aria-label="Sign out" title="Sign out" onClick={onLogout}><LogOut className="size-[18px]" /></Button>
       </div>

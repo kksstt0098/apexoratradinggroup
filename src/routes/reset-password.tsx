@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/reset-password")({
-  head: () => ({ meta: [{ title: "Reset Password — ETO Markets" }, { name: "description", content: "Choose a new password for your ETO Markets account." }, { property: "og:title", content: "Reset Password — ETO Markets" }, { property: "og:description", content: "Choose a new password for your ETO Markets account." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
+  head: () => ({ meta: [{ title: "Reset Password — VW Markets" }, { name: "description", content: "Choose a new password for your VW Markets account." }, { property: "og:title", content: "Reset Password — VW Markets" }, { property: "og:description", content: "Choose a new password for your VW Markets account." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: ResetPassword,
 });
 function ResetPassword() {

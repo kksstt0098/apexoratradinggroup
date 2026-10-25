@@ -4,15 +4,16 @@ import { Mail, Eye, EyeOff, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { checkInviteCode } from "@/lib/signup-validation";
+import { BrandLogo } from "@/components/brand-logo";
 import bg from "@/assets/login-bg.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sign In — ETO Markets" },
-      { name: "description", content: "Sign in to your ETO Markets account and start the adventure." },
-      { property: "og:title", content: "Sign In — ETO Markets" },
-      { property: "og:description", content: "Sign in to your ETO Markets account and start the adventure." },
+      { title: "Sign In — VW Markets" },
+      { name: "description", content: "Sign in to your VW Markets account and start the adventure." },
+      { property: "og:title", content: "Sign In — VW Markets" },
+      { property: "og:description", content: "Sign in to your VW Markets account and start the adventure." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -20,26 +21,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function Logo() {
-  return (
-    <svg viewBox="0 0 64 64" className="h-12 w-12 sm:h-16 sm:w-16" aria-hidden>
-      <defs>
-        <linearGradient id="eg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="var(--brand-yellow)" />
-          <stop offset="0.5" stopColor="var(--brand-orange)" />
-          <stop offset="1" stopColor="var(--primary)" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M50 18 C42 8 22 8 14 22 C6 36 16 54 32 54 C42 54 50 48 54 40 M18 34 L50 26"
-        fill="none"
-        stroke="url(#eg)"
-        strokeWidth="7"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
 
 function Index() {
   const navigate = useNavigate();
@@ -90,13 +71,13 @@ function Index() {
           className="w-full max-w-[612px] rounded-3xl bg-card px-6 py-8 shadow-2xl sm:px-10 sm:py-12 lg:min-h-screen lg:rounded-b-none"
         >
           <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-background shadow-sm sm:h-24 sm:w-24">
-            <Logo />
+            <BrandLogo className="h-12 w-14 sm:h-16 sm:w-20" />
           </div>
 
           {mode === "signin" ? (
             <>
               <h1 className="mt-6 text-center text-2xl font-bold text-foreground sm:text-3xl">
-                {reset ? "Reset password" : "Welcome to ETO Markets"}
+                {reset ? "Reset password" : "Welcome to VW Markets"}
               </h1>
               <p className="mt-2 text-center text-sm text-muted-foreground sm:text-base">
                 Please sign-in to your account and start the adventure
