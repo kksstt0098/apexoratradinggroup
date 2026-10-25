@@ -19,6 +19,9 @@
  */
 
 @theme inline {
+  --color-login-foreground: var(--login-foreground);
+  --color-login-muted: var(--login-muted);
+  --color-login-footer: var(--login-footer);
   --color-account-background: var(--account-background);
   --color-banner-overlay: var(--banner-overlay);
   --color-anniversary: var(--brand-yellow);
@@ -65,6 +68,9 @@
 }
 
 :root {
+  --login-foreground: oklch(0.98 0 0);
+  --login-muted: oklch(0.83 0 0);
+  --login-footer: oklch(0.12 0 0 / 82%);
   --account-background: oklch(0.98 0.004 70);
   --banner-overlay: oklch(0.08 0 0 / 55%);
   --radius: 0.625rem;
