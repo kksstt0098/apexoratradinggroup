@@ -8,12 +8,13 @@ import { getAccount } from "@/lib/account.functions";
 import { supabase } from "@/integrations/supabase/client";
 import bg from "@/assets/login-bg.jpg";
 import devices from "@/assets/copy-trading.jpg";
+import { BrandLogo } from "@/components/brand-logo";
 import { AccountSidebar } from "@/components/account-sidebar";
 
 const accountQuery = queryOptions({ queryKey: ["my-account"], queryFn: () => getAccount() });
 export const Route = createFileRoute("/_authenticated/dashboard")({
   loader: ({ context }) => context.queryClient.ensureQueryData(accountQuery),
-  head: () => ({ meta: [{ title: "My Accounts — ETO Markets" }, { name: "description", content: "Your ETO Markets account balance and invitations." }, { property: "og:title", content: "My Accounts — ETO Markets" }, { property: "og:description", content: "Your ETO Markets account balance and invitations." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
+  head: () => ({ meta: [{ title: "My Accounts — VW Markets" }, { name: "description", content: "Your VW Markets account balance and invitations." }, { property: "og:title", content: "My Accounts — VW Markets" }, { property: "og:description", content: "Your VW Markets account balance and invitations." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Dashboard,
 });
 
@@ -50,10 +51,10 @@ function Dashboard() {
     </header>
     <main className="px-5 pt-6 md:px-8 xl:px-12 2xl:px-[72px]">
       <section className="relative h-[224px] overflow-hidden rounded-[20px] bg-foreground md:h-[200px] xl:h-[224px] 2xl:h-[240px]">
-        <img src={bg} alt="ETO Markets racing anniversary city" width={1920} height={1088} className="h-full w-full object-cover object-right" />
+        <img src={bg} alt="VW Markets racing anniversary city" width={1920} height={1088} className="h-full w-full object-cover object-right" />
         <div className="absolute inset-0 bg-banner-overlay" />
         <div className="absolute left-7 top-16 text-primary-foreground md:left-8 md:top-12 xl:left-12">
-          <div className="flex items-center gap-5"><span className="text-xl font-bold">ETO<br /><span className="text-xs font-normal">Markets</span></span><span className="text-3xl font-black italic text-anniversary">13 <span className="block text-xs font-normal">YEARS</span></span></div>
+          <div className="flex items-center gap-5"><span className="flex items-center gap-2"><BrandLogo className="h-9 w-12 shrink-0" /><span className="text-xl font-bold">VW<br /><span className="text-xs font-normal">Markets</span></span></span><span className="text-3xl font-black italic text-anniversary">13 <span className="block text-xs font-normal">YEARS</span></span></div>
           <h2 className="mt-4 text-xl font-bold text-anniversary md:text-2xl xl:text-3xl">Race Beyond Limits</h2>
         </div>
       </section>
@@ -81,9 +82,9 @@ function Dashboard() {
       <footer className="border-t border-border/60 pt-5 pb-40 text-xs leading-5 text-muted-foreground md:pb-24 md:pr-24 md:text-[13px] md:leading-[1.65] xl:pr-28">
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
           <h2 className="text-base font-bold text-foreground">Disclaimer</h2>
-          <span className="text-xs">© 2026 ETO Markets Limited</span>
+          <span className="text-xs">© 2026 VW Markets Limited</span>
         </div>
-        <p className="mt-3">ETO Markets Limited is registered in Seychelles with Company Number 850672-1 and is authorized by the Financial Services Authority (FSA) under License Number SD062. ETO Markets is authorized and regulated by the Mauritius Financial Services Commission (FSC) under License Number C119023893.</p>
+        <p className="mt-3">VW Markets Limited is registered in Seychelles with Company Number 850672-1 and is authorized by the Financial Services Authority (FSA) under License Number SD062. VW Markets is authorized and regulated by the Mauritius Financial Services Commission (FSC) under License Number C119023893.</p>
         <p className="mt-3">The information and advertisements on this website are not intended for use by any person in any country or jurisdiction where such use is contrary to local laws or regulations. Products and services offered on this website are not intended for residents of Afghanistan, Belarus, Canada, Central African Republic, Crimea, Cuba, Democratic Republic of Congo (DRC), Ethiopia, Guinea-Bissau, Iran, Iraq, Israel, Lebanon, Libya, Malaysia, Mali, Nicaragua, North Korea, Somalia, South Sudan, Sudan, Syria, Russia, Ukraine, United States, Venezuela, Yemen, and Zimbabwe.</p>
         <p className="mt-3">The information provided on this website is general in nature and does not constitute personal financial advice. Please note that investing in CFDs and Margin FX Contracts carries significant risks and is not suitable for all investors. You do not own, or have, any interest in the underlying assets. Any information or general financial product advice given is generic in nature and does not take into account your financial situation, needs, or personal objectives. Past performance is not a reliable indicator of future performance. Investing in leveraged products carries significant risks. We recommend that you seek independent advice and ensure that you fully understand the risks involved before trading. It is important that you read and consider our disclosure documents (<strong className="text-foreground">Client Agreement</strong>, <strong className="text-foreground">Privacy Policy</strong> &amp; <strong className="text-foreground">Risk Disclosure</strong>) before acquiring any product.</p>
       </footer>

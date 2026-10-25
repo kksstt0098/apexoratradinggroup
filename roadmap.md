@@ -1,4 +1,5 @@
 # Account work
+- [x] Replace all brand names and logo locations with VW Markets without changing other layout or behavior.
 - [x] Separate phone and laptop/PC account layouts to match their respective screenshots and verify both signed in.
 - [x] Connect signup/sign-in, optional referrals, and sign-out.
 - [x] Remove email-code fields and implement password recovery.
