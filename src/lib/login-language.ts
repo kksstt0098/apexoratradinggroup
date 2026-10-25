@@ -1,0 +1,45 @@
+export type LoginLanguage = "en" | "my";
+
+const myanmar: Record<string, string> = {
+  "Welcome to VW Markets": "VW Markets မှ ကြိုဆိုပါတယ်",
+  "Please sign-in to your account and start the adventure": "သင့်အကောင့်သို့ ဝင်ရောက်ပါ",
+  "Email": "အီးမေးလ်",
+  "Password": "စကားဝှက်",
+  "Enter your email": "အီးမေးလ် ထည့်ပါ",
+  "Enter your password": "စကားဝှက် ထည့်ပါ",
+  "Reset password": "စကားဝှက် ပြန်သတ်မှတ်ရန်",
+  "Back to Sign In": "အကောင့်ဝင်ရန် ပြန်သွားမည်",
+  "Send reset link": "စကားဝှက်ပြန်သတ်မှတ်ရန် လင့်ခ်ပို့မည်",
+  "Sending…": "ပို့နေသည်…",
+  "Signing in…": "အကောင့်ဝင်နေသည်…",
+  "Sign In": "အကောင့်ဝင်ရန်",
+  "Don't have an account yet?": "အကောင့် မရှိသေးဘူးလား?",
+  "Create Live Account": "အကောင့်သစ် ဖွင့်ရန်",
+  "Try Demo Account": "အစမ်းအကောင့်",
+  "Create account": "အကောင့် ဖွင့်ရန်",
+  "Provide your details to begin your trading journey with us.": "အကောင့်ဖွင့်ရန် သင့်အချက်အလက်များ ဖြည့်ပါ။",
+  "Personal Details": "ကိုယ်ရေးအချက်အလက်",
+  "Step: 1 / 2": "အဆင့်: 1 / 2",
+  "First Name": "အမည်၏ ပထမပိုင်း",
+  "Middle Name (Optional)": "အလယ်အမည် (မဖြည့်လည်းရ)",
+  "Last Name": "အမည်၏ နောက်ဆုံးပိုင်း",
+  "Enter your first name": "အမည်၏ ပထမပိုင်း ထည့်ပါ",
+  "Enter your middle name": "အလယ်အမည် ထည့်ပါ",
+  "Enter your last name": "အမည်၏ နောက်ဆုံးပိုင်း ထည့်ပါ",
+  "Confirm Password": "စကားဝှက် အတည်ပြုရန်",
+  "Re-enter your password": "စကားဝှက် ပြန်ထည့်ပါ",
+  "Phone Number": "ဖုန်းနံပါတ်",
+  "+15551234567 (Country Code Required)": "+15551234567 (နိုင်ငံကုဒ် ထည့်ရန်လိုအပ်သည်)",
+  "Country/Region of Residence": "နေထိုင်ရာ နိုင်ငံ/ဒေသ",
+  "Please select your country": "သင့်နိုင်ငံ ရွေးပါ",
+  "Invite Code (Optional)": "ဖိတ်ခေါ်ကုဒ် (မဖြည့်လည်းရ)",
+  "Enter your 6-digit invite code": "ဂဏန်း ၆ လုံးပါ ဖိတ်ခေါ်ကုဒ် ထည့်ပါ",
+  "Creating account…": "အကောင့်ဖွင့်နေသည်…",
+  "Continue": "ဆက်လုပ်ရန်",
+  "Already a customer?": "အကောင့်ရှိပြီးပြီလား?",
+  "Sign in to your account": "သင့်အကောင့်သို့ ဝင်ရန်",
+};
+
+export function loginText(language: LoginLanguage, text: string): string {
+  return language === "my" ? myanmar[text] ?? text : text;
+}

@@ -11,6 +11,7 @@
 
 ## Account architecture
 - Use the shared BrandLogo component for all brand marks so asset changes stay consistent without affecting surrounding layouts.
+- Keep public login translations in a browser-safe dictionary and its disclaimer in a dedicated component, so language selection cannot change authentication behavior or account-page presentation.
 - Keep sign-in and signup in the same public index panel; private account pages live under the client-only `_authenticated` layout to avoid SSR session redirects.
 - Read private account data through authenticated server functions and TanStack Query loaders; keep browser auth operations on the generated client.
 - Profile updates may change personal fields only, never balances, referral ownership or invite codes, to prevent user-controlled account data.
