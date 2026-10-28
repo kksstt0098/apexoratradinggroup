@@ -14,6 +14,41 @@ export type Database = {
   }
   public: {
     Tables: {
+      kyc_submissions: {
+        Row: {
+          address_path: string
+          created_at: string
+          id: string
+          identity_path: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          address_path: string
+          created_at?: string
+          id?: string
+          identity_path: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          address_path?: string
+          created_at?: string
+          id?: string
+          identity_path?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "kyc_submissions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           balance: number
