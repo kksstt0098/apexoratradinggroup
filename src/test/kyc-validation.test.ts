@@ -3,7 +3,7 @@ import { kycPathsSchema, validateKycFile } from "@/lib/kyc-validation";
 
 describe("KYC document rules", () => {
   it("accepts JPG, JPEG, PNG and PDF", () => {
-    for (const [name, type] of [["id.jpg", "image/jpeg"], ["id.jpeg", "image/jpeg"], ["id.png", "image/png"], ["bill.pdf", "application/pdf"]]) expect(validateKycFile({ name, type, size: 100 })).toBe("");
+    for (const { name, type } of [{ name: "id.jpg", type: "image/jpeg" }, { name: "id.jpeg", type: "image/jpeg" }, { name: "id.png", type: "image/png" }, { name: "bill.pdf", type: "application/pdf" }]) expect(validateKycFile({ name, type, size: 100 })).toBe("");
     expect(validateKycFile({ name: "file.exe", type: "application/octet-stream", size: 100 })).not.toBe("");
   });
   it("enforces the 10MB limit", () => {

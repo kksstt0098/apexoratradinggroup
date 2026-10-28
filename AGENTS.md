@@ -11,6 +11,7 @@
 
 ## Account architecture
 - Store KYC documents in a private user-scoped storage bucket with immutable submitted files; read submission status through authenticated server functions and never equate submission with approval.
+- Share the account disclaimer across account pages so legal text and clearance for navigation stay consistent.
 - Use the shared BrandLogo component for all brand marks so asset changes stay consistent without affecting surrounding layouts.
 - Keep public login translations in a browser-safe dictionary and its disclaimer in a dedicated component, so language selection cannot change authentication behavior or account-page presentation.
 - Keep sign-in and signup in the same public index panel; private account pages live under the client-only `_authenticated` layout to avoid SSR session redirects.
