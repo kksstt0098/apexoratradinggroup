@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import bg from "@/assets/login-bg.jpg";
 import devices from "@/assets/copy-trading.jpg";
 import { BrandLogo } from "@/components/brand-logo";
+import { AccountDisclaimer } from "@/components/account-disclaimer";
 import { AccountSidebar } from "@/components/account-sidebar";
 
 const accountQuery = queryOptions({ queryKey: ["my-account"], queryFn: () => getAccount() });
@@ -77,17 +78,9 @@ function Dashboard() {
         <h2 className="mt-8 text-[28px] font-bold leading-[1.3]">Please complete<br />identity verification first</h2>
         <p className="mt-4 text-base leading-6">To help keep your account secure and meet compliance requirements, some services require KYC identity verification before use. Once verified, you can continue with the related operation.</p>
         <p className="mt-4 text-sm leading-5 text-muted-foreground"><Info className="mr-1 inline h-3.5 w-3.5" />Verification usually only takes a few minutes. Please prepare a valid identity document in advance.</p>
-        <Button className="mt-5 h-12 rounded-full px-6 font-bold" onClick={() => show("Identity verification")}>Verify Now</Button>
+        <Button className="mt-5 h-12 rounded-full px-6 font-bold" onClick={() => navigate({ to: "/profile-settings" })}>Verify Now</Button>
       </section>
-      <footer className="border-t border-border/60 pt-5 pb-40 text-xs leading-5 text-muted-foreground md:pb-24 md:pr-24 md:text-[13px] md:leading-[1.65] xl:pr-28">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-          <h2 className="text-base font-bold text-foreground">Disclaimer</h2>
-          <span className="text-xs">© 2026 VW Markets Limited</span>
-        </div>
-        <p className="mt-3">VW Markets Limited is registered in Seychelles with Company Number 850672-1 and is authorized by the Financial Services Authority (FSA) under License Number SD062. VW Markets is authorized and regulated by the Mauritius Financial Services Commission (FSC) under License Number C119023893.</p>
-        <p className="mt-3">The information and advertisements on this website are not intended for use by any person in any country or jurisdiction where such use is contrary to local laws or regulations. Products and services offered on this website are not intended for residents of Afghanistan, Belarus, Canada, Central African Republic, Crimea, Cuba, Democratic Republic of Congo (DRC), Ethiopia, Guinea-Bissau, Iran, Iraq, Israel, Lebanon, Libya, Malaysia, Mali, Nicaragua, North Korea, Somalia, South Sudan, Sudan, Syria, Russia, Ukraine, United States, Venezuela, Yemen, and Zimbabwe.</p>
-        <p className="mt-3">The information provided on this website is general in nature and does not constitute personal financial advice. Please note that investing in CFDs and Margin FX Contracts carries significant risks and is not suitable for all investors. You do not own, or have, any interest in the underlying assets. Any information or general financial product advice given is generic in nature and does not take into account your financial situation, needs, or personal objectives. Past performance is not a reliable indicator of future performance. Investing in leveraged products carries significant risks. We recommend that you seek independent advice and ensure that you fully understand the risks involved before trading. It is important that you read and consider our disclosure documents (<strong className="text-foreground">Client Agreement</strong>, <strong className="text-foreground">Privacy Policy</strong> &amp; <strong className="text-foreground">Risk Disclosure</strong>) before acquiring any product.</p>
-      </footer>
+      <AccountDisclaimer />
     </main>
     </div>
     <Button className="fixed bottom-24 right-5 z-20 h-12 w-12 rounded-full shadow-lg md:bottom-8 md:right-6 md:h-14 md:w-14 [&_svg]:size-6" aria-label="Support" onClick={() => show("Support")}><Headset /></Button>

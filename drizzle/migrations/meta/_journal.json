@@ -15,6 +15,13 @@
       "when": 1792586375722,
       "tag": "0001_protect_profile_account_fields",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793157502575,
+      "tag": "0002_private_kyc_submissions",
+      "breakpoints": true
     }
   ]
 }

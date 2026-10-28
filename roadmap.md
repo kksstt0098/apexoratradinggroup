@@ -1,4 +1,5 @@
 # Account work
+- [x] Add screenshot-matched KYC page and private document upload/submission; verify signed-in PC and phone flow.
 - [x] Add screenshot-matched public login logo/language header and disclaimer footer; verify PC and phone layouts.
 - [x] Replace all brand names and logo locations with VW Markets without changing other layout or behavior.
 - [x] Separate phone and laptop/PC account layouts to match their respective screenshots and verify both signed in.
