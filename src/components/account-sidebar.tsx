@@ -4,9 +4,9 @@ import { BrandLogo } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
 
 
-export function AccountSidebar({ onSelect, userName, onLogout }: { onSelect: (name: string) => void; userName: string; onLogout: () => void }) {
+export function AccountSidebar({ onSelect, userName, onLogout, onAccounts }: { onSelect: (name: string) => void; userName: string; onLogout: () => void; onAccounts?: () => void }) {
   const [collapsed, setCollapsed] = useState(false);
-  const [closed, setClosed] = useState<string[]>(["Fund Management", "Social Trading"]);
+  const [closed, setClosed] = useState<string[]>(onAccounts ? ["Trading", "Fund Management", "Social Trading"] : ["Fund Management", "Social Trading"]);
   const groups = [
     { name: "Trading", icon: CandlestickChart, items: ["My Accounts", "Trading Performance", "Trading Orders"] },
     { name: "Fund Management", icon: Wallet, items: ["Deposit", "Withdrawal", "Account Transfer"] },
@@ -32,7 +32,7 @@ export function AccountSidebar({ onSelect, userName, onLogout }: { onSelect: (na
         <Button variant="ghost" className={`h-11 w-full justify-start gap-3 ${name === "Trading" ? "rounded-full bg-background text-primary shadow-sm" : "text-muted-foreground"} ${collapsed ? "px-0 justify-center" : "px-4"}`} aria-label={name} title={collapsed ? name : undefined} aria-expanded={!closed.includes(name)} onClick={() => setClosed(current => current.includes(name) ? current.filter(item => item !== name) : [...current, name])}>
           <Icon className="size-[18px] shrink-0" />{!collapsed && <><span className="min-w-0 flex-1 text-left text-sm">{name}</span>{closed.includes(name) ? <Plus className="size-3 shrink-0" /> : <Minus className="size-3 shrink-0" />}</>}
         </Button>
-        {!collapsed && !closed.includes(name) && <div className="mt-1 space-y-1">{items.map(item => <Button key={item} variant="ghost" className={`h-10 w-full justify-start pl-11 text-sm font-normal ${item === "My Accounts" ? "text-primary" : "text-muted-foreground"}`} aria-current={item === "My Accounts" ? "page" : undefined} onClick={() => item === "My Accounts" ? window.scrollTo({ top: 0, behavior: "smooth" }) : onSelect(item)}>{item}</Button>)}</div>}
+        {!collapsed && !closed.includes(name) && <div className="mt-1 space-y-1">{items.map(item => <Button key={item} variant="ghost" className={`h-10 w-full justify-start pl-11 text-sm font-normal ${item === "My Accounts" && !onAccounts ? "text-primary" : "text-muted-foreground"}`} aria-current={item === "My Accounts" && !onAccounts ? "page" : undefined} onClick={() => item === "My Accounts" ? onAccounts ? onAccounts() : window.scrollTo({ top: 0, behavior: "smooth" }) : onSelect(item)}>{item}</Button>)}</div>}
       </div>)}
       {standalone.map(({ name, icon: Icon }) => <Button key={name} variant="ghost" className={`mb-2 h-11 w-full gap-3 text-muted-foreground ${collapsed ? "justify-center px-0" : "justify-start px-4"}`} aria-label={name} title={collapsed ? name : undefined} onClick={() => onSelect(name)}><Icon className="size-[18px] shrink-0" />{!collapsed && <span className="text-sm font-normal">{name}</span>}</Button>)}
     </nav>
