@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedProfileSettingsRouteImport } from './routes/_authenticated/profile-settings'
+import { Route as AuthenticatedQuotesRouteImport } from './routes/_authenticated/quotes'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const AuthenticatedProfileSettingsRoute =
     path: '/profile-settings',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedQuotesRoute = AuthenticatedQuotesRouteImport.update({
+  id: '/quotes',
+  path: '/quotes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile-settings': typeof AuthenticatedProfileSettingsRoute
+  '/quotes': typeof AuthenticatedQuotesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile-settings': typeof AuthenticatedProfileSettingsRoute
+  '/quotes': typeof AuthenticatedQuotesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -69,13 +77,25 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/profile-settings': typeof AuthenticatedProfileSettingsRoute
+  '/_authenticated/quotes': typeof AuthenticatedQuotesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/reset-password' | '/dashboard' | '/profile-settings'
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/dashboard'
+    | '/profile-settings'
+    | '/quotes'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/reset-password' | '/dashboard' | '/profile-settings'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/dashboard'
+    | '/profile-settings'
+    | '/quotes'
   id:
     | '__root__'
     | '/'
@@ -84,6 +104,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/_authenticated/dashboard'
     | '/_authenticated/profile-settings'
+    | '/_authenticated/quotes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -137,17 +158,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileSettingsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/quotes': {
+      id: '/_authenticated/quotes'
+      path: '/quotes'
+      fullPath: '/quotes'
+      preLoaderRoute: typeof AuthenticatedQuotesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedProfileSettingsRoute: typeof AuthenticatedProfileSettingsRoute
+  AuthenticatedQuotesRoute: typeof AuthenticatedQuotesRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedProfileSettingsRoute: AuthenticatedProfileSettingsRoute,
+  AuthenticatedQuotesRoute: AuthenticatedQuotesRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
