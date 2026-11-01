@@ -28,7 +28,7 @@ function Dashboard() {
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-  const show = (name: string) => { setError(""); setDialog(name); };
+  const show = (name: string) => { if (name === "Funds") { navigate({ to: "/quotes" }); return; } setError(""); setDialog(name); };
   async function logout() {
     setBusy(true);
     await queryClient.cancelQueries();
@@ -61,7 +61,7 @@ function Dashboard() {
       </section>
       <div className="mt-4 grid gap-4 md:mt-6 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,2.05fr)_minmax(0,1fr)] xl:gap-6">
         <section className="min-w-0 rounded-[20px] border border-border/40 bg-background px-5 py-6 md:min-h-[260px] xl:px-8 xl:py-8">
-          <div className="flex items-center gap-2"><h2 className="text-xl font-bold">Funds</h2><Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground" aria-label={hidden ? "Show balance" : "Hide balance"} onClick={() => setHidden(!hidden)}>{hidden ? <EyeOff /> : <Eye />}</Button></div>
+          <div className="flex items-center gap-2"><h2 className="text-xl font-bold">Funds</h2><Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground" aria-label={hidden ? "Show balance" : "Hide balance"} onClick={() => setHidden(!hidden)}>{hidden ? <EyeOff /> : <Eye />}</Button><Button variant="link" className="ml-auto px-0 text-xs" onClick={() => show("Funds")}>Quotes</Button></div>
           <p className="mt-4 flex items-center gap-1 text-sm">Account Balance <Info className="h-3.5 w-3.5 text-muted-foreground" /></p>
           <p className="mt-1"><strong className="text-2xl">{hidden ? "••••" : Number(profile.balance).toFixed(2)}</strong> <span className="text-sm">USD</span></p>
           <div className="mt-4 flex flex-wrap gap-2 md:mt-9 xl:gap-3">{["Deposit", "Withdraw", "Transfer"].map(label => <Button key={label} variant="secondary" className="rounded-full px-5 xl:h-11" onClick={() => show(label)}>{label}</Button>)}</div>
