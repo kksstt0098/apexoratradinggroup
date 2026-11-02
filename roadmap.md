@@ -1,5 +1,6 @@
 # Account work
-- [ ] Replace sample quotes with real live Forex and metals prices (requires a market-data connection).
+- [x] Replace sample quotes with actual Swissquote Forex/metals bid/ask; verified automatic timestamp and price updates on PC and phone.
+- [ ] Confirm commercial redistribution/display rights for Swissquote public quotes before publishing (requires provider permission or applicable license).
 - [x] Add MT5-style major Forex and XAUUSD sample quotes to the indicated Funds navigation button; verify signed-in interaction, search, filters and phone/PC display.
 - [x] Add screenshot-matched KYC page and private document upload/submission; verify signed-in PC and phone flow.
 - [x] Add screenshot-matched public login logo/language header and disclaimer footer; verify PC and phone layouts.
