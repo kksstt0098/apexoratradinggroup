@@ -28,7 +28,7 @@ function Dashboard() {
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-  const show = (name: string) => { if (name === "Funds") { navigate({ to: "/quotes" }); return; } setError(""); setDialog(name); };
+  const show = (name: string) => { if (name === "Funds") { navigate({ to: "/quotes" }); return; } if (name === "Downloads") { navigate({ to: "/charts" }); return; } setError(""); setDialog(name); };
   async function logout() {
     setBusy(true);
     await queryClient.cancelQueries();
