@@ -10,7 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Account architecture
-- Keep the market watchlist in a dedicated authenticated route with browser-safe sample instruments; label sample quotes as non-live until a real market-data source is connected.
+- Keep instrument metadata browser-safe and fetch actual Swissquote premium broker bid/ask through an authenticated server function with at most six concurrent requests; never synthesize prices, retain provider timestamps, and mark stale or closed quotes honestly. Public feed accessibility does not establish commercial redistribution rights.
 - Store KYC documents in a private user-scoped storage bucket with immutable submitted files; read submission status through authenticated server functions and never equate submission with approval.
 - Share the account disclaimer across account pages so legal text and clearance for navigation stay consistent.
 - Use the shared BrandLogo component for all brand marks so asset changes stay consistent without affecting surrounding layouts.
