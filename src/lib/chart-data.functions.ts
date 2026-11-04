@@ -20,7 +20,7 @@ async function getJson(url: string) {
 
 const binanceCandles = (rows: unknown[][]): Candle[] => rows.map(r => ({ time: Number(r[0]) / 1000, open: +r[1]!, high: +r[2]!, low: +r[3]!, close: +r[4]!, volume: +r[5]! }));
 
-async function yahooCandles(symbol: string, interval: string, range: string): Promise<{ candles: Candle[]; meta: Record<string, number> }> {
+async function yahooCandles(symbol: string, interval: string, range: string): Promise<{ candles: Candle[]; meta: { regularMarketPrice: number; chartPreviousClose?: number; regularMarketDayHigh: number; regularMarketDayLow: number; regularMarketTime: number } }> {
   const data = await getJson(`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}=X?interval=${interval}&range=${range}`);
   const r = data.chart.result[0]; const q = r.indicators.quote[0];
   const candles: Candle[] = [];
