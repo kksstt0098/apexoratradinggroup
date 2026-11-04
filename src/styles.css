@@ -19,6 +19,8 @@
  */
 
 @theme inline {
+  --color-market-up: var(--market-up);
+  --color-market-down: var(--market-down);
   --color-quote-bid: var(--quote-bid);
   --color-quote-ask: var(--quote-ask);
   --color-login-foreground: var(--login-foreground);
@@ -70,6 +72,8 @@
 }
 
 :root {
+  --market-up: oklch(0.68 0.16 160);
+  --market-down: oklch(0.63 0.21 15);
   --quote-bid: oklch(0.49 0.18 255);
   --quote-ask: oklch(0.56 0.22 27);
   --login-foreground: oklch(0.98 0 0);
