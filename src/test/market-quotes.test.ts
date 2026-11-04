@@ -34,3 +34,14 @@ describe("requested quote instruments", () => {
     expect(filterQuotes("xau", "Forex")).toEqual([]);
   });
 });
+import { aggregateCandles, periodChange } from "../lib/chart-math";
+describe("chart math", () => {
+  it("merges hourly candles into 4h candles", () => {
+    const c = [0, 1, 2, 3].map(i => ({ time: i * 3600, open: 10 + i, high: 20 + i, low: 5 - i, close: 11 + i, volume: 1 }));
+    expect(aggregateCandles(c, 14400)).toEqual([{ time: 0, open: 10, high: 23, low: 2, close: 14, volume: 4 }]);
+  });
+  it("computes 7-day change from real daily closes", () => {
+    const d = [0, 7].map(i => ({ time: i * 86400, open: 0, high: 0, low: 0, close: i === 0 ? 100 : 110, volume: 0 }));
+    expect(periodChange(d, 7)).toBeCloseTo(10);
+  });
+});
