@@ -52,7 +52,7 @@ export const getChartData = createServerFn({ method: "GET" })
         candles: binanceCandles(k),
         stats: { last: +t.lastPrice, changePct: +t.priceChangePercent, high: +t.highPrice, low: +t.lowPrice, volBase: +t.volume, volQuote: +t.quoteVolume, mark: +mark.markPrice, updatedAt: Number(t.closeTime) },
         performance: [7, 30, 90, 180, 365].map(days => periodChange(dailyCandles, days)),
-        book: { bids: (d.bids as string[][]).map(([p, q]) => [+p!, +q!] as const), asks: (d.asks as string[][]).map(([p, q]) => [+p!, +q!] as const) },
+        book: { bids: (d.bids as string[][]).map(([p, q]) => ({ price: +p!, qty: +q! as number | null })), asks: (d.asks as string[][]).map(([p, q]) => ({ price: +p!, qty: +q! as number | null })) },
         trades: (trades as { id: number; price: string; qty: string; time: number; isBuyerMaker: boolean }[]).reverse().map(x => ({ id: x.id, price: +x.price, qty: +x.qty, time: x.time, side: x.isBuyerMaker ? "sell" as const : "buy" as const })),
       };
     }
@@ -72,7 +72,7 @@ export const getChartData = createServerFn({ method: "GET" })
       stats: { last, changePct: m.chartPreviousClose ? ((last - m.chartPreviousClose) / m.chartPreviousClose) * 100 : null, high: m.regularMarketDayHigh, low: m.regularMarketDayLow, volBase: null, volQuote: null, mark: null, updatedAt: m.regularMarketTime * 1000 },
       performance: [7, 30, 90, 180, 365].map(days => periodChange(daily.candles, days)),
       // Forex has no public depth; only the real Swissquote top of book is shown.
-      book: sq ? { bids: [[sq.bid, null]] as const, asks: [[sq.ask, null]] as const } : { bids: [], asks: [] },
-      trades: [],
+      book: sq ? { bids: [{ price: sq.bid, qty: null as number | null }], asks: [{ price: sq.ask, qty: null as number | null }] } : { bids: [], asks: [] },
+      trades: [] as { id: number; price: number; qty: number; time: number; side: "buy" | "sell" }[],
     };
   });
