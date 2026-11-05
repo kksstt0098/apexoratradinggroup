@@ -1,4 +1,5 @@
 # Account work
+- [ ] Fix XAUUSD/XAGUSD charts when Binance rejects published-server requests; test real fallback candles on phone.
 - [x] Replace sample quotes with actual Swissquote Forex/metals bid/ask; verified automatic timestamp and price updates on PC and phone.
 - [ ] Confirm commercial redistribution/display rights for Swissquote public quotes before publishing (requires provider permission or applicable license).
 - [x] Add MT5-style major Forex and XAUUSD sample quotes to the indicated Funds navigation button; verify signed-in interaction, search, filters and phone/PC display.
