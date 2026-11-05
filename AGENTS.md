@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Account architecture
+- Keep all existing and future application source, configuration, migrations, and app asset references in the project so Lovable Git sync includes them; uploaded/downloaded media use tracked `.asset.json` CDN pointers, while generated app images may be tracked directly. Never include private credentials, user-uploaded KYC documents, dependencies, or generated build output, because repository sync must remain portable and safe.
 - Keep instrument metadata browser-safe and fetch actual Swissquote premium broker bid/ask through an authenticated server function with at most six concurrent requests; never synthesize prices, retain provider timestamps, and mark stale or closed quotes honestly. Public feed accessibility does not establish commercial redistribution rights.
 - Store KYC documents in a private user-scoped storage bucket with immutable submitted files; read submission status through authenticated server functions and never equate submission with approval.
 - Share the account disclaimer across account pages so legal text and clearance for navigation stay consistent.
