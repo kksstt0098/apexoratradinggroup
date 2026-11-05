@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { keepPreviousData, queryOptions, useQuery } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 import { ArrowLeft, ChevronDown, Star, Ellipsis, LayoutGrid, CircleDollarSign, LineChart as LineIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -48,8 +48,8 @@ function Charts() {
   useEffect(() => { try { setFavorites(JSON.parse(localStorage.getItem("vw-favorites") ?? "[]")); } catch { /* ignore */ } }, []);
   const toggleFav = () => setFavorites(f => { const n = f.includes(symbol) ? f.filter(s => s !== symbol) : [...f, symbol]; localStorage.setItem("vw-favorites", JSON.stringify(n)); return n; });
 
-  const { data, isPending, isError } = useQuery({ ...chartQuery(symbol, interval), placeholderData: keepPreviousData });
-  const instrument = marketQuotes.find(q => q.symbol === symbol)!;
+  const { data, isPending, isError } = useQuery(chartQuery(symbol, interval));
+  const instrument = marketQuotes.find(q => q.symbol === symbol) ?? marketQuotes[0];
   const d = instrument.digits;
   const fmt = (n: number | null | undefined, digits = d) => n == null || !Number.isFinite(n) ? "--" : n.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits });
   const compact = (n: number | null | undefined) => n == null ? "--" : Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 2 }).format(n);
@@ -78,6 +78,7 @@ function Charts() {
     <main className="mx-auto w-full max-w-5xl flex-1">
       {isPending ? <p role="status" className="p-8 text-center text-sm text-muted-foreground">Loading live market data…</p> :
        isError && !data ? <p role="alert" className="p-8 text-center text-sm text-destructive">Market data is unavailable right now. Retrying…</p> : data && s && <>
+      {data.notice && <p role="status" className="border-b border-border px-4 py-2 text-xs text-muted-foreground">{data.notice} · {new Date(s.updatedAt).toLocaleString()}</p>}
       {tab === "Price" && <>
         <section className="grid grid-cols-[minmax(0,1fr)_auto] gap-3 px-4 py-3">
           <div className="min-w-0">
@@ -113,7 +114,7 @@ function Charts() {
           {data.book.bids.length === 0 ? <p className="py-4 text-center text-muted-foreground">No live book available.</p> :
           data.book.bids.slice(0, 12).map((b, i) => { const a = data.book.asks[i]; return <div key={i} className="grid grid-cols-4 py-0.5 font-mono tabular-nums">
             <span>{b.qty == null ? "--" : fmt(b.qty, 3)}</span><span className="text-right text-market-up">{fmt(b.price)}</span><span className="pl-2 text-market-down">{fmt(a?.price)}</span><span className="text-right">{a?.qty == null ? "--" : fmt(a.qty, 3)}</span></div>; })}
-          {!data.perp && <p className="pt-2 text-muted-foreground">Forex shows Swissquote best bid/ask only; market depth isn't published.</p>}
+          {!data.perp && instrument.group === "Forex" && <p className="pt-2 text-muted-foreground">Forex shows Swissquote best bid/ask only; market depth isn't published.</p>}
         </section> : <section className="px-4 py-3 text-xs">
           {data.trades.length === 0 ? <p className="py-4 text-center text-muted-foreground">Public trade prints aren't available for this instrument.</p> : <>
           <div className="grid grid-cols-3 pb-1 text-muted-foreground"><span>Time</span><span className="text-right">Price</span><span className="text-right">Qty</span></div>
