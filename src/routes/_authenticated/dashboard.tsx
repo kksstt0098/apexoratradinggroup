@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Globe, UserRound, Plus, Eye, EyeOff, Info, Headset, LayoutDashboard, CircleDollarSign, CandlestickChart, ChartNoAxesCombined, User, Ellipsis, Copy, LogOut, ShieldHalf } from "lucide-react";
+import { Globe, UserRound, Plus, Eye, EyeOff, Info, Headset, LayoutDashboard, CandlestickChart, ChartNoAxesCombined, User, Ellipsis, Copy, LogOut, ShieldHalf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { getAccount } from "@/lib/account.functions";

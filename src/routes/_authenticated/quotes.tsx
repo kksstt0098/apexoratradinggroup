@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { ArrowLeft, Search, ChevronDown, ChevronUp, LayoutDashboard, CircleDollarSign, CandlestickChart, ChartNoAxesCombined, User, Ellipsis } from "lucide-react";
+import { ArrowLeft, Search, ChevronDown, ChevronUp, LayoutDashboard, CandlestickChart, ChartNoAxesCombined, User, Ellipsis } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { filterQuotes } from "@/lib/market-quotes";
 import { getLiveQuotes } from "@/lib/market-quotes.functions";
