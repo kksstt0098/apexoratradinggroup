@@ -8,6 +8,7 @@ import { CandleChart, type Indicator } from "@/components/candle-chart";
 import { marketQuotes } from "@/lib/market-quotes";
 import { getChartData } from "@/lib/chart-data.functions";
 import { cn } from "@/lib/utils";
+import { OrderSheet, type Side } from "@/components/order-sheet";
 
 type Interval = "15m" | "1h" | "4h" | "1d";
 const chartQuery = (symbol: string, interval: Interval) => queryOptions({
@@ -44,6 +45,8 @@ function Charts() {
   const [tab, setTab] = useState<(typeof tabs)[number]>("Price");
   const [bookTab, setBookTab] = useState<"Order Book" | "Trades">("Order Book");
   const [indicators, setIndicators] = useState<Indicator[]>(["VOL"]);
+  const [orderSide, setOrderSide] = useState<Side | null>(null);
+  const [lastSide, setLastSide] = useState<Side>("long");
   const [favorites, setFavorites] = useState<string[]>([]);
   useEffect(() => { try { setFavorites(JSON.parse(localStorage.getItem("vw-favorites") ?? "[]")); } catch { /* ignore */ } }, []);
   const toggleFav = () => setFavorites(f => { const n = f.includes(symbol) ? f.filter(s => s !== symbol) : [...f, symbol]; localStorage.setItem("vw-favorites", JSON.stringify(n)); return n; });
@@ -141,10 +144,11 @@ function Charts() {
       <div className="mx-auto flex h-[68px] max-w-5xl items-center gap-2 px-2">
         {[{ icon: Ellipsis, name: "More", to: "/dashboard" as const }, { icon: LayoutGrid, name: "Hub", to: "/quotes" as const }, { icon: CircleDollarSign, name: "Spot", to: "/quotes" as const }].map(({ icon: Icon, name, to }) =>
           <button key={name} onClick={() => navigate({ to })} className="flex w-12 shrink-0 flex-col items-center text-[11px]"><Icon className="size-5" />{name}</button>)}
-        <Button className="h-12 flex-1 rounded-lg bg-market-up text-base font-semibold text-primary-foreground hover:bg-market-up/90" aria-label="Long">Long</Button>
-        <Button className="h-12 flex-1 rounded-lg bg-market-down text-base font-semibold text-primary-foreground hover:bg-market-down/90" aria-label="Short">Short</Button>
+        <Button className="h-12 flex-1 rounded-lg bg-market-up text-base font-semibold text-primary-foreground hover:bg-market-up/90" aria-label="Long" onClick={() => { setLastSide("long"); setOrderSide("long"); }}>Long</Button>
+        <Button className="h-12 flex-1 rounded-lg bg-market-down text-base font-semibold text-primary-foreground hover:bg-market-down/90" aria-label="Short" onClick={() => { setLastSide("short"); setOrderSide("short"); }}>Short</Button>
       </div>
     </nav>
+    <OrderSheet open={orderSide != null} onOpenChange={o => !o && setOrderSide(null)} side={orderSide ?? lastSide} onSideChange={x => { setLastSide(x); setOrderSide(x); }} symbol={data?.displaySymbol ?? symbol} price={data?.stats.last} digits={d} />
     <span className="sr-only"><LineIcon /></span>
   </div>;
 }
