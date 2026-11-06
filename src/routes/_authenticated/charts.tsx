@@ -148,7 +148,7 @@ function Charts() {
         <Button className="h-12 flex-1 rounded-lg bg-market-down text-base font-semibold text-primary-foreground hover:bg-market-down/90" aria-label="Short" onClick={() => { setLastSide("short"); setOrderSide("short"); }}>Short</Button>
       </div>
     </nav>
-    <OrderSheet open={orderSide != null} onOpenChange={o => !o && setOrderSide(null)} side={orderSide ?? lastSide} onSideChange={x => { setLastSide(x); setOrderSide(x); }} symbol={data?.displaySymbol ?? symbol} price={data?.stats.last} digits={d} />
+    <OrderSheet open={orderSide != null} onOpenChange={o => !o && setOrderSide(null)} side={orderSide ?? lastSide} symbol={data?.displaySymbol ?? symbol} name={instrument.name} price={data?.stats.last} changePct={data?.stats.changePct} digits={d} />
     <span className="sr-only"><LineIcon /></span>
   </div>;
 }
