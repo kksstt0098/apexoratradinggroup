@@ -66,7 +66,7 @@ function Charts() {
       <Button variant="ghost" size="icon" aria-label="Back to My Accounts" onClick={() => navigate({ to: "/dashboard" })}><ArrowLeft className="size-5" /></Button>
       <DropdownMenu>
         <DropdownMenuTrigger className="flex min-w-0 items-center gap-1.5 text-lg font-bold">
-          <span className="truncate">{data?.displaySymbol ?? symbol}</span>
+          <span className="truncate">{symbol}</span>
           {data?.perp && <span className="rounded bg-muted px-1.5 py-0.5 text-xs font-normal">Perp</span>}
           <ChevronDown className="size-4 shrink-0" />
         </DropdownMenuTrigger>
@@ -81,7 +81,6 @@ function Charts() {
     <main className="mx-auto w-full max-w-5xl flex-1">
       {isPending ? <p role="status" className="p-8 text-center text-sm text-muted-foreground">Loading live market data…</p> :
        isError && !data ? <p role="alert" className="p-8 text-center text-sm text-destructive">Market data is unavailable right now. Retrying…</p> : data && s && <>
-      {data.notice && <p role="status" className="border-b border-border px-4 py-2 text-xs text-muted-foreground">{data.notice} · {new Date(s.updatedAt).toLocaleString()}</p>}
       {tab === "Price" && <>
         <section className="grid grid-cols-[minmax(0,1fr)_auto] gap-3 px-4 py-3">
           <div className="min-w-0">
@@ -148,7 +147,7 @@ function Charts() {
         <Button className="h-12 flex-1 rounded-lg bg-market-down text-base font-semibold text-primary-foreground hover:bg-market-down/90" aria-label="Short" onClick={() => { setLastSide("short"); setOrderSide("short"); }}>Short</Button>
       </div>
     </nav>
-    <OrderSheet open={orderSide != null} onOpenChange={o => !o && setOrderSide(null)} side={orderSide ?? lastSide} symbol={data?.displaySymbol ?? symbol} name={instrument.name} price={data?.stats.last} changePct={data?.stats.changePct} digits={d} />
+    <OrderSheet open={orderSide != null} onOpenChange={o => !o && setOrderSide(null)} side={orderSide ?? lastSide} symbol={symbol} name={instrument.name} price={data?.stats.last} changePct={data?.stats.changePct} digits={d} />
     <span className="sr-only"><LineIcon /></span>
   </div>;
 }
