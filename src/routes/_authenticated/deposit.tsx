@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { AccountSidebar } from "@/components/account-sidebar";
-import { AccountDisclaimer } from "@/components/account-disclaimer";
 import { getAccount } from "@/lib/account.functions";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -42,36 +41,36 @@ function Deposit() {
     queryClient.clear();
     await navigate({ to: "/", replace: true });
   }
-  return <div className="account-layout min-h-screen bg-background pb-24 md:pb-8">
+  return <div className="account-layout min-h-screen bg-background pb-20 md:pb-8">
     <AccountSidebar userName={name || String(profile.email)} onLogout={logout} onAccounts={accounts} onSelect={label => { if (label !== "Deposit") setNotice(`${label} services are not connected yet.`); }} />
     <div className="account-content md:ml-[216px] xl:ml-[280px] 2xl:ml-[320px]">
-      <header className="px-5 pt-7 md:px-8 xl:px-12">
-        <div className="flex items-center gap-3"><h1 className="flex-1 text-4xl font-medium">Funds</h1><Button variant="ghost" size="icon" aria-label="Back to My Accounts" onClick={accounts}><ArrowLeft /></Button></div>
-        <nav aria-label="Funds sections" className="mt-5 flex gap-5 border-b border-border">
+      <header className="px-5 pt-4 md:px-8 md:pt-7 xl:px-12">
+        <div className="flex h-10 items-center gap-2"><Button variant="ghost" size="icon" className="-ml-2 size-9 text-muted-foreground" aria-label="Back to My Accounts" onClick={accounts}><ArrowLeft className="size-4" /></Button><h1 className="flex-1 text-xl font-semibold md:text-2xl">Funds</h1><Button variant="ghost" size="icon" className="size-9 text-muted-foreground" aria-label="Support" onClick={() => setNotice("Support services are not connected yet.")}><Headset className="size-5" /></Button></div>
+        <nav aria-label="Funds sections" className="mt-2 grid grid-cols-4 border-b border-border md:mt-4 md:flex md:gap-8">
           {["Deposit", "Withdraw", "Transfer", "History"].map(tab => <Button key={tab} variant="ghost" aria-current={tab === "Deposit" ? "page" : undefined} className={`h-10 rounded-none border-b-2 px-0 text-sm font-normal hover:bg-transparent ${tab === "Deposit" ? "border-primary text-foreground" : "border-transparent text-muted-foreground"}`} onClick={() => { if (tab !== "Deposit") setNotice(`${tab} services are not connected yet.`); }}>{tab}</Button>)}
         </nav>
       </header>
       <main className="px-5 md:px-8 xl:px-12">
-        <div className="max-w-3xl">
-          <section className="space-y-5 pt-10 text-base leading-7">
-            <div><h2 className="text-xl font-medium">Step 1: Select Account</h2><p>Choose the trading account you want the deposit to be credited to.</p></div>
-            <div><h2 className="text-xl font-medium">Step 2: Enter Deposit Amount (USD or USC)</h2><p>Enter the deposit amount in USD. For Cent Accounts, enter the amount in USC.</p></div>
-            <div><h2 className="text-xl font-medium">Step 3: Choose Payment Currency</h2><p>Select the currency you want to pay with.</p><p>After selecting the currency, the system will display the corresponding payable amount.</p><p>If the payment amount is adjusted, the equivalent USD or USC amount will also update accordingly.</p></div>
+        <div className="grid max-w-5xl gap-4 pt-4 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.2fr)] md:gap-8 md:pt-10 xl:gap-12">
+          <section className="space-y-2 md:space-y-6 md:pt-1" aria-label="Deposit steps">
+            {[
+              { title: "Select account", description: "Choose the account to receive your deposit." },
+              { title: "Enter deposit amount", description: "Use USD, or USC for a Cent Account." },
+              { title: "Choose payment currency", description: "Your payable amount depends on the exchange rate." },
+            ].map((step, index) => <div key={step.title} className="flex items-start gap-3"><span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-semibold text-secondary-foreground">{index + 1}</span><div className="min-w-0"><h2 className="text-sm font-semibold leading-6">{step.title}</h2><p className="text-xs leading-5 text-muted-foreground md:text-sm">{step.description}</p></div></div>)}
           </section>
-          <form className="mt-24 space-y-5 md:mt-16" onSubmit={event => { event.preventDefault(); setNotice("Deposits are not connected yet. No payment has been taken and your balance has not changed."); }}>
-            <div className="space-y-2"><label htmlFor="deposit-account" className="text-base text-muted-foreground">Account <span className="text-destructive">*</span></label>
-              <Select value="account"><SelectTrigger id="deposit-account" className="h-12 text-base"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="account">My Account / {Number(profile.balance).toFixed(2)} USD</SelectItem></SelectContent></Select>
+          <form className="space-y-3 border-t border-border pt-4 md:border-l md:border-t-0 md:pl-8 md:pt-0 xl:pl-12" onSubmit={event => { event.preventDefault(); setNotice("Deposits are not connected yet. No payment has been taken and your balance has not changed."); }}>
+            <div className="space-y-1.5"><label htmlFor="deposit-account" className="block text-xs font-medium leading-4 text-muted-foreground">Account <span className="text-destructive">*</span></label>
+              <Select value="account"><SelectTrigger id="deposit-account" className="h-11 text-sm shadow-none"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="account">My Account / {Number(profile.balance).toFixed(2)} USD</SelectItem></SelectContent></Select>
             </div>
-            <div className="space-y-2"><label htmlFor="deposit-amount" className="text-base text-muted-foreground">Amount <span className="text-destructive">*</span></label><div className="relative"><Input id="deposit-amount" required type="number" min="0.01" step="0.01" inputMode="decimal" placeholder="0.00" value={amount} onChange={event => setAmount(event.target.value)} className="h-12 pr-16 text-xl md:text-xl" /><span className="pointer-events-none absolute right-4 top-3 text-muted-foreground">USD</span></div></div>
-            <div className="space-y-2"><label htmlFor="converted-amount" className="text-base text-muted-foreground">Converted Amount</label><div className="flex h-12 items-center gap-2 rounded-md border border-input px-3"><Input id="converted-amount" readOnly value={currency === "USD" && amount ? Number(amount).toFixed(2) : ""} placeholder={currency === "MMK" ? "Unavailable" : "0.00"} className="h-10 min-w-0 flex-1 border-0 px-1 text-xl shadow-none md:text-xl" /><Select value={currency} onValueChange={setCurrency}><SelectTrigger aria-label="Payment currency" className="h-9 w-24 text-base"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="MMK">MMK</SelectItem><SelectItem value="USD">USD</SelectItem></SelectContent></Select></div><p role="status" className="text-right text-sm text-muted-foreground">{currency === "MMK" ? "MMK exchange rate is not connected yet." : "1 USD = 1 USD"}</p></div>
-            <p className="flex items-start gap-2 text-sm leading-5 text-muted-foreground"><Info className="mt-0.5 size-4 shrink-0" />Payment methods and deposit limits are not configured yet.</p>
-            <Button type="submit" className="mt-4 h-12 w-full text-base">Next</Button>
+            <div className="space-y-1.5"><label htmlFor="deposit-amount" className="block text-xs font-medium leading-4 text-muted-foreground">Amount <span className="text-destructive">*</span></label><div className="relative"><Input id="deposit-amount" required type="number" min="0.01" step="0.01" inputMode="decimal" placeholder="0.00" value={amount} onChange={event => setAmount(event.target.value)} className="h-11 pr-16 text-base tabular-nums shadow-none md:text-base" /><span className="pointer-events-none absolute right-3 top-3 text-xs text-muted-foreground">USD</span></div></div>
+            <div className="space-y-1.5"><label htmlFor="converted-amount" className="block text-xs font-medium leading-4 text-muted-foreground">Converted Amount</label><div className="flex h-11 items-center gap-2 rounded-md border border-input px-3 focus-within:ring-1 focus-within:ring-ring"><Input id="converted-amount" readOnly value={currency === "USD" && amount ? Number(amount).toFixed(2) : ""} placeholder={currency === "MMK" ? "Unavailable" : "0.00"} className="h-9 min-w-0 flex-1 border-0 px-0 text-base tabular-nums shadow-none focus-visible:ring-0 md:text-base" /><Select value={currency} onValueChange={setCurrency}><SelectTrigger aria-label="Payment currency" className="h-8 w-20 border-0 border-l border-border pl-3 pr-0 text-xs shadow-none"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="MMK">MMK</SelectItem><SelectItem value="USD">USD</SelectItem></SelectContent></Select></div><p role="status" className="text-right text-[11px] leading-4 text-muted-foreground">{currency === "MMK" ? "MMK exchange rate is not connected yet." : "1 USD = 1 USD"}</p></div>
+            <p className="flex items-start gap-2 text-xs leading-4 text-muted-foreground"><Info className="size-4 shrink-0" />Payment methods and deposit limits are not configured yet.</p>
+            <Button type="submit" className="h-11 w-full text-sm font-semibold">Next</Button>
           </form>
         </div>
-        <AccountDisclaimer />
       </main>
     </div>
-    <Button variant="secondary" size="icon" className="fixed bottom-24 right-5 z-20 size-12 rounded-full bg-foreground text-background hover:bg-foreground/90 md:bottom-8" aria-label="Support" onClick={() => setNotice("Support services are not connected yet.")}><Headset className="size-6" /></Button>
     <nav aria-label="Account navigation" className="fixed inset-x-0 bottom-0 z-20 flex h-16 items-center justify-around border-t border-border bg-background md:hidden">
       {[{ icon: LayoutDashboard, label: "My Accounts", to: "/dashboard" }, { icon: ChartNoAxesCombined, label: "Market", to: "/quotes" }, { icon: CandlestickChart, label: "Trade", to: "/charts" }, { icon: User, label: "My profile", to: "/profile-settings" }].map(({ icon: Icon, label, to }) => <Button key={label} variant="ghost" size="icon" aria-label={label} onClick={() => navigate({ to })}><Icon className="size-5" /></Button>)}
       <Button variant="ghost" size="icon" aria-label="More" onClick={accounts}><Ellipsis className="size-5" /></Button>
