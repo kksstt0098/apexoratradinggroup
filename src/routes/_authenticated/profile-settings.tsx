@@ -42,7 +42,7 @@ function ProfileSettings() {
     setNotice(error ? "Unable to send the reset email. Please try again." : "Password reset email sent."); setResetBusy(false);
   }
   return <div className="account-layout min-h-screen bg-account-background pb-24 md:pb-8">
-    <AccountSidebar userName={name || String(profile.email)} onLogout={logout} onAccounts={accounts} onSelect={label => setNotice(`${label} services are not connected yet.`)} />
+    <AccountSidebar userName={name || String(profile.email)} onLogout={logout} onAccounts={accounts} onSelect={label => { if (label === "Deposit") { void navigate({ to: "/deposit" }); return; } setNotice(`${label} services are not connected yet.`); }} />
     <div className="account-content md:ml-[216px] xl:ml-[280px] 2xl:ml-[320px]">
       <header className="border-b border-border bg-background"><div className="flex h-[74px] items-center justify-between gap-2 px-5 md:h-20 md:px-8 xl:px-12 2xl:px-[72px]"><h1 className="text-lg font-bold md:text-2xl">Profile Settings</h1><div className="flex shrink-0 gap-1"><Button variant="ghost" size="icon" aria-label="Language" onClick={() => setNotice("English")}><Globe /></Button><Button variant="ghost" size="icon" aria-label="My profile" onClick={() => setTab("Personal Details")}><UserRound /></Button><Button size="icon" className="size-9 rounded-full" aria-label="Add account" onClick={() => setNotice("Trading accounts are not connected yet.")}><Plus /></Button></div></div></header>
       <main className="px-5 pt-8 md:px-8 xl:px-12 2xl:px-[72px]">

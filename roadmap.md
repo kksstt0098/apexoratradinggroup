@@ -1,4 +1,5 @@
 # Account work
+- [ ] Build screenshot-matched Deposit page, connect Deposit entry points, and verify signed-in phone/PC form interaction; payment processing and exchange rates are not configured.
 - [x] Fix XAUUSD/XAGUSD charts for Binance 403 responses; regression tests pass, actual COMEX candles verified for all four intervals, and signed-in phone charts render. Published-site update still requires republishing.
 - [x] Replace sample quotes with actual Swissquote Forex/metals bid/ask; verified automatic timestamp and price updates on PC and phone.
 - [ ] Confirm commercial redistribution/display rights for Swissquote public quotes before publishing (requires provider permission or applicable license).
