@@ -138,9 +138,8 @@ function Index() {
                   <span className="text-sm text-muted-foreground sm:text-base">{t("Don't have an account yet?")}</span>
                   <span className="h-px flex-1 bg-border" />
                 </div>
-                <div className="grid grid-cols-2 gap-4 pt-2 text-center text-sm font-semibold text-foreground sm:text-base">
+                <div className="pt-2 text-center text-sm font-semibold text-foreground sm:text-base">
                   <Button type="button" variant="link" onClick={() => setMode("create")} className="text-foreground hover:underline">{t("Create Live Account")}</Button>
-                  <span className="text-muted-foreground">{t("Try Demo Account")}</span>
                 </div>
               </form>
             </>
